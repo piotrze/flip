@@ -19,6 +19,10 @@ module Flip
       false
     end
 
+    def partially?
+      false
+    end
+
     def switch! key, on; raise; end
     def delete! key; raise; end
 

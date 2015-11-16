@@ -1,7 +1,7 @@
 # Database backed system-wide
+require 'byebug'
 module Flip
   class DatabaseStrategy < AbstractStrategy
-
     def initialize(model_klass = Feature)
       @klass = model_klass
     end
@@ -15,10 +15,14 @@ module Flip
     end
 
     def on? definition
-      feature(definition).enabled?
+      enabled_now?(feature(definition))
     end
 
     def switchable?
+      true
+    end
+
+    def partially?
       true
     end
 
@@ -38,5 +42,10 @@ module Flip
       @klass.where(key: definition.key.to_s).first
     end
 
+    def enabled_now?(feature)
+      return false unless feature.enabled?
+
+      feature.percentage.present? ? rand(100) < feature.percentage : true
+    end
   end
 end

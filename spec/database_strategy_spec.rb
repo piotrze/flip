@@ -12,7 +12,7 @@ describe Flip::DatabaseStrategy do
       feature :three, default: true
     end
   end
-  let(:enabled_record) { model_klass.new.tap { |m| m.stub(:enabled?) { true } } }
+  let(:enabled_record) { model_klass.new.tap { |m| m.stub(:enabled?) { true }; m.stub(:percentage) { nil } } }
   let(:disabled_record) { model_klass.new.tap { |m| m.stub(:enabled?) { false } } }
 
   subject { strategy }
