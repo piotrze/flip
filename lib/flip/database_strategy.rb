@@ -1,5 +1,4 @@
 # Database backed system-wide
-require 'byebug'
 module Flip
   class DatabaseStrategy < AbstractStrategy
     def initialize(model_klass = Feature)
